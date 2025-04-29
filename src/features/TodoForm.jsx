@@ -1,16 +1,17 @@
 import { useRef } from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
+import TextInputWithLabel from '../shared/TextInputWithLabel.jsx';
 
 function TodoForm({ onAddTodo }) {
   const todoTitleInput = useRef('');
-  const [workingTodoTitle, updateWorkingTodo] = useState ('');
+  const [workingTodoTitle, updateWorkingTodo] = useState('');
 
   function handleAddTodo(event) {
     event.preventDefault();
 
-    if (workingTodoTitle.trim() === ''){
-      alert('Please add a todo list item')
-return 
+    if (workingTodoTitle.trim() === '') {
+      alert('Please add a todo list item');
+      return;
     }
 
     onAddTodo(workingTodoTitle);
@@ -19,18 +20,17 @@ return
   }
   return (
     <form onSubmit={handleAddTodo}>
-      <label htmlFor="todoTitle">Todo</label>
-      <input
-        type="text"
-        id="todoTitle"
-        name="title"
+      <TextInputWithLabel
+      elementID = "todoTitle"
+      labelText = "Todo"
         ref={todoTitleInput}
         value={workingTodoTitle}
         onChange={(event) => {
           updateWorkingTodo(event.target.value);
         }}
       />
-      <button type="submit" disabled={workingTodoTitle.trim() === ""}>Add Todo
+      <button type="submit" disabled={workingTodoTitle.trim() === ''}>
+        Add Todo
       </button>
     </form>
   );
