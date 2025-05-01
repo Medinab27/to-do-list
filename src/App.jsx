@@ -5,6 +5,7 @@ import TodoForm from './features/TodoForm';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
+
   function handleAddTodo(newTodo) {
     const newTodoID = {
       id: todoList.length,
@@ -20,11 +21,22 @@ function App() {
     );
     setTodoList(updatedTodos);
   }
+
+  function updateTodo(editedTodo) {
+    const updatedTodos = todoList.map((todo) =>
+      todo.id === editedTodo.id ? { ...editedTodo } : todo
+    );
+    setTodoList(updatedTodos);
+  }
   return (
     <div>
       <h1>My To-dos</h1>
       <TodoForm onAddTodo={handleAddTodo} />
-      <TodoList todoList={todoList} onCompleteTodo={completeTodo} />
+      <TodoList
+        todoList={todoList}
+        onCompleteTodo={completeTodo}
+        onUpdateTodo={updateTodo}
+      />
     </div>
   );
 }

@@ -4,29 +4,23 @@ import TextInputWithLabel from '../shared/TextInputWithLabel.jsx';
 
 function TodoForm({ onAddTodo }) {
   const todoTitleInput = useRef('');
-  const [workingTodoTitle, updateWorkingTodo] = useState('');
+  const [workingTodoTitle, setWorkingTodo] = useState('');
 
   function handleAddTodo(event) {
     event.preventDefault();
-
-    if (workingTodoTitle.trim() === '') {
-      alert('Please add a todo list item');
-      return;
-    }
-
     onAddTodo(workingTodoTitle);
-    updateWorkingTodo('');
+    setWorkingTodo('');
     todoTitleInput.current.focus();
   }
   return (
     <form onSubmit={handleAddTodo}>
       <TextInputWithLabel
-      elementID = "todoTitle"
-      labelText = "Todo"
+        elementID="todoTitle"
+        labelText="Todo"
         ref={todoTitleInput}
         value={workingTodoTitle}
         onChange={(event) => {
-          updateWorkingTodo(event.target.value);
+          setWorkingTodo(event.target.value);
         }}
       />
       <button type="submit" disabled={workingTodoTitle.trim() === ''}>
