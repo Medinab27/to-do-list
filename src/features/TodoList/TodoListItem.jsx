@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import TextInputWithLabel from '../shared/TextInputWithLabel.jsx';
+import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx';
 
 function TodoListItem({ item, onCompleteTodo, onUpdateTodo }) {
   const [isEditing, setIsEditing] = useState(false);
