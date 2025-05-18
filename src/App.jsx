@@ -2,14 +2,28 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
+import TodosViewForm from './features/TodosViewForm';
+
+const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
+const token = `Bearer ${import.meta.env.VITE_PAT}`;
+
+const encodeUrl = ({ sortField, sortDirection, queryString }) => {
+  let sortQuery = `sort[0][field]=${sortField}&sort[0][direction]=${sortDirection}`;
+  let searchQuery = '';
+  if (queryString) {
+    searchQuery = `&filterByFormula=SEARCH("${queryString}", title)`;
+  }
+  return encodeURI(`${url}?${sortQuery}${searchQuery}`);
+};
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSaving, setIsSaving] = useState(false);
-  const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
-  const token = `Bearer ${import.meta.env.VITE_PAT}`;
+  const [sortField, setSortField] = useState('createdTime');
+  const [sortDirection, setSortDirection] = useState('desc');
+  const [queryString, setQueryString] = useState('');
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -23,7 +37,10 @@ function App() {
       try {
         setIsLoading(true);
         //simulate fetching data from an API
-        const response = await fetch(url, options); //fetch line
+        const response = await fetch(
+          encodeUrl({ sortDirection, sortField, queryString }),
+          options
+        ); //fetch line
         if (!response.ok) {
           throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
@@ -47,7 +64,7 @@ function App() {
     };
     //call the async function
     fetchTodos();
-  }, []);
+  }, [sortField, sortDirection, queryString]);
 
   const handleAddTodo = async (newTodo) => {
     const payload = {
@@ -71,7 +88,10 @@ function App() {
 
     try {
       setIsSaving(true);
-      const response = await fetch(url, options);
+      const response = await fetch(
+        encodeUrl({ sortField, sortDirection, queryString }),
+        options
+      );
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
@@ -95,6 +115,11 @@ function App() {
 
   const updateTodo = async (editedTodo) => {
     const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
+    setTodoList((prevList) =>
+      prevList.map((todo) =>
+        todo.id === editedTodo.id ? { ...todo, ...editedTodo } : todo
+      )
+    );
     const payload = {
       records: [
         {
@@ -115,16 +140,13 @@ function App() {
       body: JSON.stringify(payload),
     };
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(
+        encodeUrl({ sortField, sortDirection, queryString }),
+        options
+      );
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
-      //update UI with new to do item too
-      setTodoList((prevList) =>
-        prevList.map((todo) =>
-          todo.id === editedTodo.id ? { ...todo, ...editedTodo } : todo
-        )
-      );
     } catch (error) {
       console.log(error);
       setErrorMessage(`${error.message}. Reverting to do...`);
@@ -167,7 +189,10 @@ function App() {
       body: JSON.stringify(payload),
     };
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(
+        encodeUrl({ sortField, sortDirection, queryString }),
+        options
+      );
       if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
@@ -191,7 +216,17 @@ function App() {
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
         isLoading={isLoading}
-      />{' '}
+      />
+      <hr />
+      <TodosViewForm
+        sortDirection={sortDirection}
+        setSortDirection={setSortDirection}
+        sortField={sortField}
+        setSortField={setSortField}
+        queryString={queryString}
+        setQueryString={setQueryString}
+      />
+
       {errorMessage && (
         <div>
           <hr />
