@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import AppStyles from './App.module.css';
+import './App.css';
 import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
 import TodosViewForm from './features/TodosViewForm';
@@ -218,7 +218,7 @@ function App() {
       />
 
       {errorMessage && (
-        <div className={AppStyles.errorMessage}>
+        <div>
           <hr />
           <p>{errorMessage}</p>
           <button onClick={() => setErrorMessage('')}>Dismiss</button>

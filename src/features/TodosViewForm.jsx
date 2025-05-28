@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import TodosViewFormStyles from './TodosViewForm.module.css';
 
 function TodosViewForm({
   sortDirection,
@@ -27,7 +26,7 @@ function TodosViewForm({
 
   return (
     <form onSubmit={preventRefresh}>
-      <div className={TodosViewFormStyles.text}>
+      <div>
         <label htmlFor="search">Search to dos</label>
         <input
           id="search"
@@ -39,7 +38,7 @@ function TodosViewForm({
           Clear
         </button>
       </div>
-      <div className={TodosViewFormStyles.text}>
+      <div>
         <label htmlFor="sortField">Sort by</label>
         <select
           id="sortField"
