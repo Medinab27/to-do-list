@@ -1,4 +1,7 @@
 .text {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
   color: rgb(75, 91, 16);
   font-family: sans-serif;
   background-color: rgb(200, 232, 235);
@@ -6,12 +9,13 @@
   border-radius: 8px;
   display: inline-block;
   border: 2px solid rgb(90, 43, 43);
+  max-width: fit-content;
 }
 
-.ul {
+.ulTodoList {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 0.5rem;
   padding: 0;
   margin: 0;
   list-style: none;
