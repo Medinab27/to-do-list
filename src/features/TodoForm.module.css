@@ -1,0 +1,13 @@
+.text {
+  color: rgb(75, 91, 16);
+  font-family: sans-serif;
+  background-color: rgb(231, 169, 87);
+  padding: 1%;
+  border-radius: 8px;
+  border: 2px solid rgb(90, 43, 43);
+  max-width: fit-content;
+}
+
+.disabledButton {
+  font: italic;
+}

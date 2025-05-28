@@ -1,0 +1,26 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h1 {
+  font-family: monospace;
+  color: brown;
+}
+
+.button {
+  font-family: monospace;
+  color: brown;
+}
+
+.errorMessage {
+  border: 4px red;
+}
+
+:root {
+  background-image: url('/Images/To-do-list-background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
