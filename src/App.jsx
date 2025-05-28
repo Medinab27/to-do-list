@@ -26,9 +26,7 @@ function App() {
   }, [sortField, sortDirection, queryString]);
 
   useEffect(() => {
-     
     const fetchTodos = async () => {
-      
       //define an object with fetched data
       const options = {
         method: 'GET',
