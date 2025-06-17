@@ -4,7 +4,12 @@
   background-color: rgb(235, 231, 200);
   padding: 1%;
   border-radius: 8px;
-  display: inline-block;
   border: 2px solid rgb(90, 43, 43);
   margin-top: 0.5rem;
+    display: flex;        /* makes container shrink to fit content */
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  word-break: break-word;
+  max-width: 100%;
+ 
 }

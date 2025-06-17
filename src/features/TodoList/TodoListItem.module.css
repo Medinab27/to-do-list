@@ -7,16 +7,16 @@
 }
 
 .text {
-  display: flex;
+    display: inline-flex;        /* makes container shrink to fit content */
   flex-direction: column;
-  align-content: center;
+  align-items: flex-start;
+  background-color: rgb(200, 232, 235);
   color: rgb(75, 91, 16);
   font-family: sans-serif;
-  background-color: rgb(200, 232, 235);
-  padding: 1%;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
-  display: inline-block;
   border: 2px solid rgb(90, 43, 43);
-  max-width: fit-content;
+  word-break: break-word;
+  max-width: 100%;
   margin-top: 0.5rem;
 }

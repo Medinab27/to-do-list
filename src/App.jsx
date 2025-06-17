@@ -186,7 +186,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className={AppStyles.LayoutWrapper}>
       <h1>My To-dos</h1>
       <TodoForm onAddTodo={handleAddTodo} isSaving={todoState.isSaving} />
       <TodoList
