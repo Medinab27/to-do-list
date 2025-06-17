@@ -27,36 +27,38 @@ function TodoListItem({ item, onCompleteTodo, onUpdateTodo }) {
   }, [item]);
 
   return (
-    <li className={TodoListItemStyles.text}>
-      <form onSubmit={handleUpdate}>
-        {isEditing ? (
-          <>
-            <TextInputWithLabel value={workingTitle} onChange={handleEdit} />
-            <button
-              className={TodoListItemStyles.button}
-              type="button"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-            <button type="button" onClick={handleUpdate}>
-              Update
-            </button>
-          </>
-        ) : (
-          <>
-            <label className={TodoListItemStyles.label}>
-              <input
-                type="checkbox"
-                id={`checkbox${item.id}`}
-                checked={item.isCompleted}
-                onChange={() => onCompleteTodo(item.id)}
-              />
-            </label>
-            <span onClick={() => setIsEditing(true)}>{item.title}</span>
-          </>
-        )}
-      </form>
+    <li>
+      <div className={TodoListItemStyles.text}>
+        <form onSubmit={handleUpdate}>
+          {isEditing ? (
+            <>
+              <TextInputWithLabel value={workingTitle} onChange={handleEdit} />
+              <button
+                className={TodoListItemStyles.button}
+                type="button"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <button type="button" onClick={handleUpdate}>
+                Update
+              </button>
+            </>
+          ) : (
+            <>
+              <label className={TodoListItemStyles.label}>
+                <input
+                  type="checkbox"
+                  id={`checkbox${item.id}`}
+                  checked={item.isCompleted}
+                  onChange={() => onCompleteTodo(item.id)}
+                />
+              </label>
+              <span onClick={() => setIsEditing(true)}>{item.title}</span>
+            </>
+          )}
+        </form>
+      </div>
     </li>
   );
 }

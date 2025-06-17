@@ -25,11 +25,11 @@ function TodoForm({ onAddTodo, isSaving }) {
         }}
       />
       <button
-        className={TodoFormStyles.disableButton}
-        type="submit"
-        disabled={workingTodoTitle.trim() === '' || isSaving}
-      >
-        {isSaving ? 'Saving...' : 'Add Todo'}
+        className={TodoFormStyles.button}
+  type="submit"
+  disabled={workingTodoTitle.trim() === '' || isSaving}
+>
+  {isSaving ? 'Saving...' : 'Add Todo'}
       </button>
     </form>
   );

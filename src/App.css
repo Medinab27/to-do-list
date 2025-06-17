@@ -1,0 +1,35 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+   min-height: 100vh;
+  margin: 0;
+
+  background-image: url('/Images/To-do-list-background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+ 
+  font-family:
+    'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: brown;
+  padding: 2 rem 1 rem;
+}
+
+
+
+h1 {
+  font-family: monospace;
+  color: brown;
+}
+
+button {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: brown;
+  cursor: pointer;
+}
+
+p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
